@@ -197,7 +197,284 @@ namespace ConsoleApp15
             Console.WriteLine((100 * right) + (10 * middle) + (left));
             Console.ReadLine();
 
+                        //Ways to combine and sorted arrays
+            //With sort method
+            /*int[] arr1 = new int[] { 0, 2, 4 };
+            int[] arr2 = new int[] { 1, 3, 5 };
+            int[] arr3 = arr1.Concat(arr2).ToArray();
+            Array.Sort(arr3);
 
+            foreach (int num in arr3)
+            {
+                Console.WriteLine(num);
+            }
+            Console.ReadLine();
+            */
+
+            //With BubbleSort method
+            int[] arr1 = new int[] { 0, 2, 4 };
+            int[] arr2 = new int[] { 1, 3, 5 };
+            int[] arr3 = arr1.Concat(arr2).ToArray(); //arr3[0, 2, 3, 1, 3, 5]
+            int temp = 0;
+            for (int i= 0; i <arr3.Length; i++)
+                for (int j=i+1; j<arr3.Length-1; j++)
+                    if(arr3[i]>arr3[j])
+                    {
+                        temp = arr3[i];
+                        arr3[i] = arr3[j];
+                        arr3[j] = temp;
+                    }
+            foreach (int num in arr3)
+            {
+                Console.WriteLine(num);
+            }
+            Console.ReadLine();
+
+                        //Generate 10 random non-duplicating numbers between 0 and 30
+            Random random = new Random();
+            List<int> randNums = new List<int>();
+            while (randNums.Count < 10)
+            {
+                int var = random.Next(0, 30);
+                if (!randNums.Contains(var))
+                {
+                    randNums.Add(var);
+                }
+            }
+            foreach (int num in randNums)
+            {
+                Console.WriteLine(num);
+            }
+            Console.ReadLine();
+
+            //Calculate the distance between the hands on a clock
+            Console.WriteLine("Enter a military time.");
+            int time = Convert.ToInt32(Console.ReadLine());
+            int hour = time / 100;
+            int min = time % 100;
+            int hourdeg = hour * 30;
+            if(hourdeg>360)
+            {
+                hourdeg = hourdeg - 360;
+            }
+            int mindeg = min * 6;
+            int difference = Math.Abs(hourdeg - mindeg);
+            Console.WriteLine(difference);
+            Console.ReadLine();
+
+                        //program to store words in a sentence based on their character composition
+            List<string> noE = new List<string>();
+            Console.WriteLine("Enter a sentence.");
+            string mySent = Console.ReadLine();
+            string[] mySentArr = mySent.Split(' ');
+            foreach (string word in mySentArr)
+            {
+                if (!word.Contains('e'))
+                {
+                    noE.Add(word);
+                }
+            }
+            foreach (string word in noE)
+            {
+                Console.WriteLine(word);
+            }
+            Console.ReadLine();
+
+
+                        //reverse a any sized number
+
+            Console.WriteLine("Enter a number.");
+            int myNum = int.Parse(Console.ReadLine());
+            int reversedNum = 0;
+            while(myNum !=0)
+            {
+                int remainderDigit = myNum % 10;
+                reversedNum = (reversedNum * 10) + remainderDigit;
+                myNum = myNum / 10;
+            }
+            Console.WriteLine(reversedNum);
+            Console.ReadLine();
+
+
+                        //Fibonacci sequence at a certain point
+
+            Console.WriteLine("Enter a number to return the Fibonacci value at that point.");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int a = 0;
+            int b = 1;
+            List<int> fibList = new List<int>();
+            for (int i = 0; i<n; i++)
+            {
+                int temp= a;
+                a = b;
+                b = temp + a;
+                fibList.Add(b);
+            }
+            foreach (int num in fibList)
+            {
+                Console.WriteLine(num);
+            }
+                
+            //Console.WriteLine(a);
+            Console.ReadLine();
+
+                        //check to see if words are anagrams
+
+            Console.WriteLine("Enter your first word.");
+            string first = Console.ReadLine();
+            Console.WriteLine("Enter your second word.");
+            string second = Console.ReadLine();
+            char[] arr1 = first.ToLower().ToCharArray();
+            Array.Sort(arr1);
+            string newword1 = new string (arr1);
+            char[] arr2 = second.ToLower().ToCharArray();
+            Array.Sort(arr2);
+            string newword2 = new string(arr2);
+            if (newword1== newword2)
+            {
+                Console.WriteLine("The words you entered are anagrams.");
+            }
+            else if (newword1 != newword2)
+            {
+                Console.WriteLine("You did not enter an anagram.");
+            }
+            Console.ReadLine();
+
+                        //is prime
+
+            Console.WriteLine("Enter a number.");
+            int myNum = int.Parse(Console.ReadLine());
+            int count = 0;
+            for(int i = 1; i<(myNum/2); i++)
+            {
+                if(myNum%i==0)
+                {
+                    count++;
+                }
+            }
+            if (count >= 2)
+            Console.WriteLine(myNum + " is not prime.");
+            else Console.WriteLine(myNum + " is prime.");
+            Console.ReadLine();
+
+                        //Store a reversed array in a new array
+            int[] arr1 = new int[5] { 1, 3, 5, 6, 7 };
+            int[] arr2 = new int[5];
+            for (int i = arr1.Length-1, j = 0; i >= 0; i--, j++)
+            {
+                arr2[j] += arr1[i];
+            }
+            foreach (int num in arr2)
+            {
+                Console.WriteLine(num);
+            }
+            Console.ReadLine();
+
+                        //Swap numbers not using more memory
+            Console.WriteLine("Enter a number.");//10
+            int firstNum = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter another number.");//8
+            int secNum = int.Parse(Console.ReadLine());
+            firstNum = firstNum + secNum;//10+8=18
+            secNum = firstNum - secNum;//18-8=10
+            firstNum = firstNum - secNum;
+            Console.WriteLine(firstNum);
+            Console.WriteLine(secNum);
+            Console.ReadLine();
+
+
+            //Random shuffle of cards
+
+            string[] suite = new string[4] { "Diamonds", "Clubs", "Spades", "Hearts" };
+            string[] value = new string[13] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+            List<string> shuffle = new List<string>();
+            Random rnd = new Random();
+            while (shuffle.Count<52)
+            {
+                 string randomCard = value[rnd.Next(value.Length)] + " of " + suite[rnd.Next(suite.Length)];
+                 if (!shuffle.Contains(randomCard))
+                {
+                    shuffle.Add(randomCard);
+                    //Console.WriteLine(randomCard);
+                }
+            }
+            foreach(string card in shuffle)
+            {
+                Console.WriteLine(card);
+            }
+            Console.ReadLine();
+
+            //Reverse a any number w/o methods
+             Console.WriteLine("Enter a number.");
+            int myNum = int.Parse(Console.ReadLine());
+            int reverseNum = 0;
+            while (myNum > 0)
+            {
+                 int rightDig = myNum % 10;
+                 reverseNum = (reverseNum * 10) + rightDig;
+                 myNum = myNum / 10;
+            }
+            Console.WriteLine(reverseNum);
+            Console.ReadLine();
+
+                        //Check a string for duplicates
+            Console.WriteLine("Enter a word.");
+            string input = Console.ReadLine();
+            char[] inputArray = input.ToLower().ToCharArray();
+            Array.Sort(inputArray);
+            string inputSort = new string(inputArray);
+            int count = 0;
+            for(int i = 0; i <inputSort.Length-1; i++)
+            {
+                if(inputSort[i]==inputSort[i+1])
+                {
+                    count++;
+                }
+            }
+            if (count>0)
+            {
+                Console.WriteLine("duplicates");
+            }
+            else
+            {
+                Console.WriteLine("no duplicates");
+            }
+            Console.ReadLine();
+
+            //Print a multiplication table
+            Console.WriteLine("Enter a number.");
+            int max = Convert.ToInt32(Console.ReadLine());
+            int min = 1;
+            for(int i = min; i<= max; i++)
+            {
+                for(int j = min; j<=max; j++)
+                {
+                    Console.Write(j*i);
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+
+                        //string compression
+            string lower = "aaabbcccc";
+            string ans = "";
+            int count = 1;
+            for (int i = 0; i < lower.Length - 1; i++)
+            {
+                if (lower[i] == lower[i + 1])
+                    count++;
+                else
+                {
+                    ans = ans + lower[i] + count;
+                    count = 1;
+                }
+            }
+            ans = ans + lower[lower.Length - 1] + count;
+            if(lower.Length < ans.Length)
+                Console.WriteLine(lower);
+            else
+            Console.WriteLine(ans);
+            Console.ReadLine();
         }
     }
 }
